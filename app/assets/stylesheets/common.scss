@@ -1,0 +1,149 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+/* Colores*/
+.bold{
+  font-weight: bold;
+}
+
+/* Colores*/
+$green: #16a085;
+$grey: #5A6576;
+$other-grey: #E7ECEE;
+$blue: #058CC5;
+$red: #d2527f;
+$ligth-blue: #3498d8;
+$teal: #009688;
+
+.white{
+  background-color: white;
+}
+.background-imagen{
+  background-image: url("sologaming.jpg");
+  background-size: cover;
+}
+.white-text{
+  color:white;
+}
+.other-grey{
+  background-color: $other-grey;
+}
+.green{
+
+  background-color: $green;
+
+}
+
+.green-text{
+  color: $green;
+}
+.blue{
+  background-color: $blue;
+}
+.blue-text{
+  color: $blue;
+
+}
+
+.ligth-blue{
+  background-color: $ligth-blue;
+}
+.ligth-blue-text{
+  color: $ligth-blue;
+
+}
+.red{
+  background-color: $red;
+}
+
+.red-text{
+  color:  $red;
+}
+
+.grey{
+  background-color: $grey;
+}
+
+.grey-text{
+  color :$grey;
+}
+
+
+
+/* padding*/
+
+.large-padding{
+  padding: 5px 10px;
+}
+
+.big-padding{
+  padding: 2em;
+}
+
+
+/* Alineamiento*/
+
+.in-top{
+  vertical-align: top !important;
+}
+
+.absolute{
+  position: absolute;
+}
+
+.no-float{
+
+  float: none !important;
+}
+
+.no-padding{
+  padding: 0px;
+}
+
+.inline-block{
+  float: none !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -4px;
+
+}
+
+/* Margins*/
+
+.no-margin{
+  margin: 0px;
+}
+.big-top-space{
+  margin-top: 50px;
+}
+.top-space{
+  margin-top: 1em;
+}
+/* Tamaños*/
+
+.bottom-space{
+  margin-bottom: 2em;
+}
+
+
+.small{
+  font-size: 12px;
+}
+
+.normal{
+  font-size: 1.2em;
+}
+.medium{
+  font-size: 1.5em;
+}
+
+.big{
+  font-size: 3em;
+  }
+.bigger{
+  font-size: 4em;
+}
+.ultra-big{
+  font-size: 7em;
+}
