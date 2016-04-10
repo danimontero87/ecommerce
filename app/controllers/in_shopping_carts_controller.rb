@@ -1,7 +1,8 @@
 class InShoppingCartsController < ApplicationController
 
-  def create
+def create
 
+if user_signed_in?
     in_shopping_cart = InShoppingCart.new(product_id: params[:product_id],
                                       shopping_cart: @shopping_cart)
 
@@ -11,6 +12,9 @@ class InShoppingCartsController < ApplicationController
 
              redirect_to products_path(id: params[:product_id]), notice: "No pudimos agregar al corrito, intentelo de nuevo"
             end
+
+end
+  redirect_to carrito_path, notice: "Tienes que logarte para actualizar tu carrito"
 end
 
   def destroy
