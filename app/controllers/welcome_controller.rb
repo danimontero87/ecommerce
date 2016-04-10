@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   end
 
   def unregistered
-    render layout: "landing"
+    
   end
 
     def payment_succed
