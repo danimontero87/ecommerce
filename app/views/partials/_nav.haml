@@ -4,6 +4,9 @@
       %li.col-md-4.inline-block.text-center
         =image_tag "logo-gaming.png" ,height:"100px"
       %li.col-md-6.inline-block.tall-padding
+        =link_to "users/sign_in", class:"right-space white-text" do
+          %i.mdi-account-box
+          Log in
         -if user_signed_in?
           =link_to root_path, class:"right-space white-text" do
             %i.mdi-action-shopping-basket

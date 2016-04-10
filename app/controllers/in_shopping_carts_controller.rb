@@ -1,20 +1,23 @@
 class InShoppingCartsController < ApplicationController
 
-def create
+  def create
+    if user_signed_in?
 
-if user_signed_in?
     in_shopping_cart = InShoppingCart.new(product_id: params[:product_id],
                                       shopping_cart: @shopping_cart)
 
           if in_shopping_cart.save
             redirect_to carrito_path, notice: "Guardamos el producto en tu carrito"
+            return 
           else
 
              redirect_to products_path(id: params[:product_id]), notice: "No pudimos agregar al corrito, intentelo de nuevo"
             end
+  end
 
-end
-  redirect_to carrito_path, notice: "Tienes que logarte para actualizar tu carrito"
+  redirect_to carrito_path, notice: "no pudimos"
+
+
 end
 
   def destroy
