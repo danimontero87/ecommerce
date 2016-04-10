@@ -11,9 +11,13 @@
 
 <%= render "partials/nav" %>
 
-  <div style="<%= "display:none;" if alert.nil? && notice.nil? %>">
-    <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+  <div style="<%= "display:none;" if notice.nil? %>">
+    <p class="notice alert alert-dismissible alert-info"><%= notice %></p>
+
+  </div>
+  <div style="<%= "display:none;" if alert.nil? %>">
+
+      <p class="alert alert-dismissible alert-danger"><%= alert %></p>
   </div>
 <div class="no-float center-block">
 
