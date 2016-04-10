@@ -1,12 +1,12 @@
 %header
   %nav.green
     %ul.no-list.no-padding.text-center
-      %li.col-md-4.inline-block.text-center
+      %li.col-md-3.inline-block.text-center
         =image_tag "logo-gaming.png" ,height:"100px"
-      %li.col-md-6.inline-block.tall-padding
-        =link_to "users/sign_in", class:"right-space white-text" do
+      %li.col-md-7.inline-block.tall-padding
+        = link_to products_url, class:"right-space white-text" do
           %i.mdi-account-box
-          Log in
+          Productos
         -if user_signed_in?
           =link_to root_path, class:"right-space white-text" do
             %i.mdi-action-shopping-basket
@@ -23,3 +23,7 @@
             (
             =@shopping_cart.products.count
             )
+        -if current_user.nil? 
+          =link_to "users/sign_in", class:"right-space white-text" do
+            %i.mdi-account-box
+            Log in
