@@ -1,21 +1,23 @@
-%h1 Listing products
+%h1.text-center Listado de productos
 
-%table
+%table.table-striped.table-hover
   %thead
     %tr
-      %th Name
-      %th Pricing
-      %th Description
-      %th User
-      %th
-      %th
-      %th
+      %th.text-center Nombre
+      %th.text-center Precio
+      %th.text-center Imagen
+      %th.text-center Descripción
+      %th.text-center Usuario
+      %th.text-center Acción
+      %th.text-center Acción
+      %th.text-center Acción
 
   %tbody
     - @products.each do |product|
       %tr
         %td= product.name
         %td= product.pricing
+        %td= image_tag product.avatar.url(:medium), class: "img-thumbnail"
         %td= product.description
         %td= product.user.email
         %td= link_to 'Show', product
