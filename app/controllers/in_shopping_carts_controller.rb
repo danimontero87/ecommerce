@@ -8,14 +8,14 @@ class InShoppingCartsController < ApplicationController
 
           if in_shopping_cart.save
             redirect_to carrito_path, notice: "Guardamos el producto en tu carrito"
-            return 
+            return
           else
 
              redirect_to products_path(id: params[:product_id]), notice: "No pudimos agregar al corrito, intentelo de nuevo"
             end
   end
 
-  redirect_to carrito_path, notice: "no pudimos"
+  redirect_to carrito_path, notice: "Te tienes que registrar para poder realizar las compra"
 
 
 end
