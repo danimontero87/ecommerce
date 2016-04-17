@@ -1,29 +1,24 @@
 %header
   %nav.green
-    %ul.no-list.no-padding.text-center
+    %ul.no-list.no-padding.text-center.no-margin
       %li.col-md-3.inline-block.text-center
         =image_tag "logo-gaming.png" ,height:"100px"
       %li.col-md-7.inline-block.tall-padding
+        =link_to root_path, class:"right-space white-text" do
+          %i
+          Mi tienda
         = link_to products_url, class:"right-space white-text" do
           %i.mdi-account-box
           Productos
         -if user_signed_in?
-          =link_to root_path, class:"right-space white-text" do
-            %i.mdi-action-shopping-basket
-            Mi tienda
-          =link_to "", class:"right-space white-text" do
-            %i.mdi-action-trending-up
-            Órdenes
-          =link_to "", class:"right-space white-text" do
-            %i.mdi-action-alarm
-            Descuentos
           =link_to carrito_path, class:"white-text" do
             %i.mdi-action-shopping-cart
             Mi carrito
             (
             =@shopping_cart.products.count
             )
-        -if current_user.nil? 
+          =link_to "Cerrar sesión", destroy_user_session_path, class:"right-space white-text", method: :delete
+        -if current_user.nil?
           =link_to "users/sign_in", class:"right-space white-text" do
             %i.mdi-account-box
-            Log in
+            Iniciar sesión
