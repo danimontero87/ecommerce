@@ -14,8 +14,8 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
- 
-class Product < ActiveRecord::Base
+
+class Product < ActiveRecord::Base 
   belongs_to :user
   has_many :attachments
   validates_presence_of :name,:user,:pricing

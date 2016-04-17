@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 before_action :authenticate_user!, except: [:index, :show]
+before_action :authenticate_editor!, only: [:new, :create, :update]
+before_action :authenticate_admin!, only: [:destroy, :publish, :edit]
   # GET /products
   # GET /products.json
   def index
@@ -26,6 +28,7 @@ before_action :authenticate_user!, except: [:index, :show]
 
   # GET /products/1/edit
   def edit
+
   end
 
   # POST /products
