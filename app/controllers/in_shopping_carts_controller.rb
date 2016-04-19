@@ -11,7 +11,7 @@ class InShoppingCartsController < ApplicationController
             return
           else
 
-             redirect_to products_path(id: params[:product_id]), notice: "No pudimos agregar al corrito, intentelo de nuevo"
+             redirect_to products_path(id: params[:product_id]), notice: "No pudimos agregar al carrito, intentelo de nuevo"
             end
   end
 

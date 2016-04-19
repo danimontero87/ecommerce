@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   end
 
   def unregistered
-    
+        @articles = Article.all
   end
 
     def payment_succed

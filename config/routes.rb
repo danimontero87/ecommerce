@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :articles
+  
   get 'shopping/carts'
 
   resources :attachments, only: [:create, :destroy, :new, :show]
