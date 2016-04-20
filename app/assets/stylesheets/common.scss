@@ -23,6 +23,11 @@ $teal: #009688;
   background-image: url("sologaming.jpg");
   background-size: cover;
 }
+
+.bg-fondo{
+  background-image: url("darkBackground.gif");
+
+}
 .white-text{
   color:white;
 }
@@ -81,6 +86,12 @@ $teal: #009688;
   padding: 2em;
 }
 
+
+/* Bordes*/
+
+.cabecera-borde{
+border-bottom: 1px solid rgba(225,225,225, .3)
+}
 
 /* Alineamiento*/
 

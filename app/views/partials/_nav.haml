@@ -1,5 +1,5 @@
 %header
-  %nav.green
+  %nav.bg-fondo.cabecera-borde
     %ul.no-list.no-padding.text-center.no-margin
       %li.col-md-3.inline-block.text-center
         =image_tag "logo-gaming.png" ,height:"100px"
@@ -10,6 +10,9 @@
         = link_to products_url, class:"right-space white-text" do
           %i.mdi-account-box
           Productos
+        = link_to articles_url, class:"right-space white-text" do
+          %i.mdi-account-box
+          Articulos
         -if user_signed_in?
           =link_to carrito_path, class:"white-text" do
             %i.mdi-action-shopping-cart
@@ -19,6 +22,6 @@
             )
           =link_to "Cerrar sesión", destroy_user_session_path, class:"right-space white-text", method: :delete
         -if current_user.nil?
-          =link_to "users/sign_in", class:"right-space white-text" do
+          =link_to new_user_session_path, class:"right-space white-text" do
             %i.mdi-account-box
             Iniciar sesión

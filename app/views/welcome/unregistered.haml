@@ -42,21 +42,17 @@
           %p.white-text.text-justify.small
             Recibe tu dinero en tu cuenta de PayPal y tu cliente su producto en su email inmediatamente. Así de fácil.
 
-.red.white-text.big-padding.kostic{style:"margin-top:5em;"}
-  %h1.text-center Listado de Articulos
-  %table.cold-md-8.cold-xs-6.col-sm-6.no-float.center-block
-    %thead
-      %tr
-        %th.text-center.medium Nombre
-        %th.text-center.medium Descripción
-    %tbody
-      - @articles.each do |article|
-        %tr
-          %td.large-padding= article.title
-          %td.large-padding= article.text
+.big-padding.kostic{style:"margin-top:5em;"}
+  %h1.text-center.green-text Gamming
+  - @articles.each do |article|
+    %div.jumbotron
+      %h2.large-padding= article.title
+      %p.large-padding= truncate(article.text, length:150)
+      %p.large-padding= article.created_at
+      %p.large-padding= link_to 'Ver', article ,class:"btn-success large-padding medium"
 %h1.text-center Recibe nuestras ofertas
 .top-space.big-padding.bottom-space
   .col-md-11.col-xs-12.center-block.no-float
     =form_tag(create_email_path, method: :post, remote:true,id: "emails-form") do
       =email_field_tag "email", nil, class:"col-xs-12 inline-block text-center landing-form", placeholder:"Escribe aquí tu email"
-    #email-info.red.white-text.large-padding
+    #email-info.green.white-text.large-padding

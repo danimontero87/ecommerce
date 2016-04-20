@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
 
-  resources :articles
-  
+  resources :articles do
+    resources :comments
+  end
+
   get 'shopping/carts'
 
   resources :attachments, only: [:create, :destroy, :new, :show]
