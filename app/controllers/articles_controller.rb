@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
 
     @articles = Article.all
@@ -8,6 +10,8 @@ class ArticlesController < ApplicationController
 
   def show
   @article = Article.find(params[:id])
+
+  @comment = Comment.new
   end
 
 def new
@@ -16,7 +20,7 @@ end
 
 
 def create
-  @article = Article.new(article_params)
+  @article = current_user.articles.new(article_params)
 
   if @article.save
     redirect_to @article
@@ -30,7 +34,7 @@ end
 
   private
   def article_params
-    params.require(:article).permit(:title, :text)
+    params.require(:article).permit(:title, :text, :cover)
   end
 
 end

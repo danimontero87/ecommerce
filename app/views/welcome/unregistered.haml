@@ -47,6 +47,7 @@
   - @articles.each do |article|
     %div.jumbotron
       %h2.large-padding= article.title
+      %div.visibilidad.large-padding= image_tag article.cover.url(:thumb)
       %p.large-padding= truncate(article.text, length:150)
       %p.large-padding= article.created_at
       %p.large-padding= link_to 'Ver', article ,class:"btn-success large-padding medium"
