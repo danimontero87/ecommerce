@@ -12,6 +12,13 @@
         <div> <h4>Comentarios </h4>
 
         <%= render "comments/form"%>
+        <ul id="comments-box">
+        <% @article.comments.each do |comment| %>
+        <li>  <%= comment.body %>
+
+          </li>
+          <%end%>
+          </ul>
 
         </div>
 

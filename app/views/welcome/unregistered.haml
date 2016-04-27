@@ -1,9 +1,6 @@
 %div.background-imagen.no-padding
   .col-md-10.no-float.center-block
-    .col-md-6.no-padding.inline-block
-      %h1.white-text.ultra-big.kostic
-        %strong
-          Descubre las novedades del mundo gamming
+
 .grey.white-text.big-padding.kostic
   .col-md-10.no-float.center-block
     .absolute{style:"bottom:-4.5em; width:100%; left:0px;"}
@@ -42,16 +39,16 @@
           %p.white-text.text-justify.small
             Recibe tu dinero en tu cuenta de PayPal y tu cliente su producto en su email inmediatamente. Así de fácil.
 
-.big-padding.kostic{style:"margin-top:5em;"}
+.big-padding.margin-auto.kostic{style:"margin-top:5em;"}
   %h1.text-center.green-text Gamming
   - @articles.each do |article|
     %div.jumbotron
       %h2.large-padding= article.title
-      %div.visibilidad.large-padding= image_tag article.cover.url(:thumb)
+      %div.visibilidad.large-padding.altura= image_tag article.cover.url(:medium)
       %p.large-padding= truncate(article.text, length:150)
-      %p.large-padding= article.created_at
+      %p.large-padding= article.created_at.strftime("%A %y-%m-%d")
       %p.large-padding= link_to 'Ver', article ,class:"btn-success large-padding medium"
-%h1.text-center Recibe nuestras ofertas
+%h1.text-center.clearboth Recibe nuestras ofertas
 .top-space.big-padding.bottom-space
   .col-md-11.col-xs-12.center-block.no-float
     =form_tag(create_email_path, method: :post, remote:true,id: "emails-form") do

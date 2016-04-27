@@ -1,0 +1,30 @@
+<h1 class="text-center"><%= @category.name %></h1>
+  <%@category.articles.each do |article|%>
+<div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
+  <article class="card big-padding">
+    <header>
+        <h1 class="grey-text bold">
+
+
+        <%= article.title %>
+
+        </h1>
+    </header>
+      <section>
+        <div>
+          <%=image_tag article.cover.url(:medium) %>
+        </div>
+        <h3 class="green-text bold normal"> <%=  article.text%></h3>
+
+        <p class="large-padding"><%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
+
+      </section>
+
+  </article>
+</div>
+
+<br>
+
+      <%end%>
+
+      <%= link_to 'Back', articles_path %>

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_shopping_cart
+  before_action :set_categories
 
 
 
@@ -18,6 +19,10 @@ redirect_to root_path unless user_signed_in? && current_user.is_admin?
 end
 
   private
+
+  def set_categories
+    @Categories = Category.all
+  end
 
   def set_shopping_cart
 

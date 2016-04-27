@@ -18,10 +18,18 @@ def new
   @article = Article.new
 end
 
+def destroy
+  @article.destroy
+  respond_to do |format|
+    format.html { redirect_to articles_url, notice: 'Producto eliminado' }
+    format.json { head :no_content }
+  end
+end
+
 
 def create
   @article = current_user.articles.new(article_params)
-
+  @article.categories = params[:categories]
   if @article.save
     redirect_to @article
   else

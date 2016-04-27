@@ -29,6 +29,12 @@
   </p>
 
   <p>
+    <%= f.label :Categoria %><br>
+    <%  @Categories.each do |category| %>
+    <%= check_box_tag "categories[]", category.id %> <%= category.name %>
+    <% end %>
+  </p>
+  <p>
     <%= f.submit %>
   </p>
 
