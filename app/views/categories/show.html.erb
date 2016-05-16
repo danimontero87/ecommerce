@@ -1,30 +1,52 @@
-<h1 class="text-center"><%= @category.name %></h1>
-  <%@category.articles.each do |article|%>
-<div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
-  <article class="card big-padding">
-    <header>
-        <h1 class="grey-text bold">
-
-
-        <%= article.title %>
-
-        </h1>
-    </header>
-      <section>
-        <div>
-          <%=image_tag article.cover.url(:medium) %>
-        </div>
-        <h3 class="green-text bold normal"> <%=  article.text%></h3>
-
-        <p class="large-padding"><%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
-
-      </section>
-
-  </article>
-</div>
-
+<ul class="no-list no-padding text-center no-margin white-text green">
+                      <% @category.subcategories.each do |subcategory| %>
+                          <li class="inline-block large-padding white-text ">  <%=link_to subcategory.name, subcategory, class:"white-text" %></li>
+                          <%end%>
+</ul>
 <br>
 
-      <%end%>
 
-      <%= link_to 'Back', articles_path %>
+
+<div class="float-left display-block ancho-40">
+
+            <h3 class="text-center">Noticias, Análisis, Reportajes <%= @category.name %></h3>
+
+ <%@category.articles.each do |article|%>
+        <div class="col-lg-12 cold-md-8 cold-xs-12 col-sm-10 col-sm-11">
+                <article class="card">
+
+                    <section>
+                        <div class="display-block float-left ancho-40 large-padding">  <%=image_tag article.cover.url(:thumb) %></div>
+                        <div class="display-block float-left ancho-60 large-padding"><h2 class="grey-text bold">  <%=link_to article.title, article %></h2>
+                          <%= truncate(article.text, length: 200 )%>
+
+                        </div>
+
+                    </section>
+
+                </article>
+        </div>
+      <%end%>
+  </div>
+
+
+
+
+        <div class="display-block float-right ancho-60">
+          <h3 class="text-center">Productos <%= @category.name %></h3>
+
+    <%@category.products.each do |product|%>
+                          <div  class="display-block float-left">
+
+                              <div class="visibilidad relative "> <%= image_tag product.avatar.url(:medium), class: "img-thumbnail" %></div>
+                              <p class="green-text bold "> <%= product.name %></p>
+
+                                    <p ><span class="medium bold green-text"> <%= product.pricing %>€ </span><%= link_to 'Comprar', product ,class:"green white-text large-padding small radius" %></p>
+                              <!-- <p class="large-padding"> <%= product.created_at.strftime("%A %y-%m-%d") %></p> -->
+
+                              <p class="large-padding "> <%= truncate(product.description, length:20) %></p>
+
+                        </div>
+    <%end%>
+
+    <div>

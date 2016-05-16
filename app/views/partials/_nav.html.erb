@@ -1,0 +1,41 @@
+<header>
+  <nav class="bg-fondo cabecera-borde">
+    <ul class="no-list no-padding text-center no-margin">
+      <li class="col-md-3 inline-block text-center">
+        <%=link_to root_path, class:"right-space white-text" do %>
+
+          <%=image_tag "sologaming.png" ,height:"50px" %>
+        <%end%>
+      </li>
+
+      <li class="col-md-8 inline-block tall-padding">
+
+              <% @Categories.each do |category| %>
+                <%=link_to category.name, category ,class:"right-space white-text" %>
+
+                  <%end%>
+        <%=link_to products_url, class:"right-space white-text" do %>
+          Productos
+        <%end%>
+
+        <%=link_to articles_url, class:"right-space white-text" do %>
+          Blog
+        <%end%>
+
+        <% if user_signed_in? %>
+        <%=link_to carrito_path, class:"white-text" do %>
+          Mi carrito (<%=@shopping_cart.products.count%>)
+        <%end%>
+
+        <%=link_to "Cerrar sesión", destroy_user_session_path, class:"right-space white-text", method: :delete %>
+        <%end%>
+        <%if current_user.nil? %>
+          <%=link_to new_user_session_path, class:"right-space white-text" do %>
+            Iniciar sesión
+
+          <%end%>
+      <%end%>
+      </li>
+    </ul>
+    </nav>
+</header>

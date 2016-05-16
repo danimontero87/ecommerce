@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-
   resources :categories
+  resources :subcategories
+
   resources :articles do
     resources :comments
   end
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   post "/emails/create", as: :create_email
 
   post "/pagar", to: "payments#create"
+
+  post "/payments/cards", to:"payments#process_card"
 
   get "/carrito", to: "shopping_carts#show"
 

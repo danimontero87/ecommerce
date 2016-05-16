@@ -1,0 +1,16 @@
+= form_for @subcategory do |f|
+  - if @subcategory.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@subcategory.errors.count, "error")} prohibited this subcategory from being saved:"
+      %ul
+        - @subcategory.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  - @Categories.each do |category|
+    = check_box_tag "subcategory[category_id]", category.id
+    =category.name
+  .actions
+    = f.submit 'Save'

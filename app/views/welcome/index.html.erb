@@ -1,0 +1,52 @@
+<div class="background-imagen no-padding" >
+</div>
+
+
+<div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block big-padding kostic" >
+
+      <div class="col-md-2 ">
+        <p class="text-center black white-text large-padding">Ultimas entradas</p>
+        <% @articles.each do |article| %>
+            <div class="sombra white top-space">
+
+              <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium),class: "img-thumbnail"  %></div>
+              <p class="large-padding  grey-text small"> <%= truncate(article.text , length:80)%></p>
+                <%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
+                 <span class="large-padding"> <%= article.created_at.strftime("%d-%m-%y") %></span>
+              </div>
+          <%end%>
+
+      </div>
+      <div class="col-md-8">
+        <h3 class="text-center black white-text large-padding"> Los más vendidos </h3>
+        <% @products.each do |product| %>
+          <div class="col-md-2 ">
+
+              <div class="visibilidad relative "> <%= image_tag product.avatar.url(:medium), class: "img-thumbnail" %></div>
+              <p class="large-padding green-text bold altura "> <%= product.name %></p>
+
+                    <p ><span class="medium bold green-text"> <%= product.pricing %>€ </span><%= link_to 'Comprar', product ,class:"green white-text large-padding small radius" %></p>
+              <!-- <p class="large-padding"> <%= product.created_at.strftime("%A %y-%m-%d") %></p> -->
+
+              <p class="large-padding "> <%= truncate(product.description, length:20) %></p>
+
+        </div>
+          <%end%>
+        </div>
+      <div class="col-md-2 ">
+
+
+
+      </div>
+</div>
+
+<h1 class="text-center clearboth">Recibe nuestras ofertas </h1>
+
+<div class="top-space big-padding bottom-space">
+  <div class="col-md-11 col-xs-12 center-block no-float">
+
+      <%= form_tag(create_email_path, method: :post, remote:true,id: "emails-form") do %>
+      <%= email_field_tag "email", nil, class:"col-xs-12 inline-block text-center landing-form", placeholder:"Escribe aquí tu email"  %>
+      <%end%>
+      <div class="green white-text large-padding" id="email-info"> </div>
+  </div>

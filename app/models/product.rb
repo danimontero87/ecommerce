@@ -15,7 +15,9 @@
 #  updated_at          :datetime         not null
 #
 
-class Product < ActiveRecord::Base 
+class Product < ActiveRecord::Base
+  belongs_to :category
+  belongs_to :subcategory
   belongs_to :user
   has_many :attachments
   validates_presence_of :name,:user,:pricing
@@ -29,6 +31,14 @@ def paypal_form
 {name: name, sku: :item, price: (pricing / 100), currency: "EUR", quantity: 1  }
 end
 
+def self.to_csv(options = {})
+  CSV.generate(options) do |csv|
+    csv << column_names
+    all.each do |product|
+      csv << product.attributes.values_at(*column_names)
+    end
+  end
+end
 
 
 end

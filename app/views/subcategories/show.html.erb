@@ -1,0 +1,20 @@
+<h1 class="text-center"><%= @subcategory.name %></h1>
+  <% @subcategory.products.each do |products|%>
+<div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
+  <article class="card big-padding">
+    <header>
+        <h1 class="grey-text bold">
+
+
+        <%= products.name %>
+
+        </h1>
+    </header>
+
+
+  </article>
+</div>
+
+
+
+      <%end%>

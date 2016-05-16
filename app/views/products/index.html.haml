@@ -2,7 +2,7 @@
 
 %table.table-striped.table-hover.cold-md-10.cold-xs-12.col-sm-11.no-float.center-block
   %tbody
-    - @products.each do |product|
+    - @productos.each do |product|
       %tr
         %td.large-padding= product.name
         %td.large-padding= product.pricing
@@ -15,3 +15,7 @@
 %br
 
 = link_to 'New Product', new_product_path
+
+
+= link_to "CSV", products_path(format: "csv")
+=link_to "Excel", products_path(format: "xls")

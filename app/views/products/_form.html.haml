@@ -5,4 +5,9 @@
   = f.text_field :pricing
   = f.file_field :avatar
   = f.text_area :description
+  = f.label :Categoria
+  - @subcategories.each do |subcategory|
+    = check_box_tag "product[subcategory_id]", subcategory.id
+    =subcategory.name
+    =subcategory.category.name
   = f.submit "Enviar"

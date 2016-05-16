@@ -27,7 +27,7 @@ class MyPayment < ActiveRecord::Base
       event :pay do
 
         after do
-        
+
 
         end
         transitions from: :created, to: :payed

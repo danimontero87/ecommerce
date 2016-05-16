@@ -13,7 +13,31 @@ attr_accessor :payment, :total, :return_url, :cancel_url, :items
 
   def process_payment
 
-    self.payment = Payment.new({
+    self.payment = Payment.new(payment_options)
+      self.payment
+  end
+
+def process_card(card_data)
+  options = payment_options
+  options[:payer][:payment_method] = "credit_card"
+  options[:payer][:funding_instruments] = [{
+    credit_card: {
+      type: 'VISA',
+      number: card_data[:number],
+      expire_month: card_data[:expire_month].to_i,
+      expire_year: card_data[:expire_year].to_i,
+      cvv2: card_data[:ccv2]
+    }
+
+    }]
+    self.payment = Payment.new(payment_options)
+    self.payment
+end
+
+
+
+  def payment_options
+    {
           intent: "sale",
           payer:{
             payment_method: "paypal"
@@ -36,8 +60,8 @@ attr_accessor :payment, :total, :return_url, :cancel_url, :items
             return_url: @return_url,
             cancel_url: @cancel_url,
           }
-      })
-      self.payment
+      }
+
   end
 
   def self.checkout(payer_id, payment_id,&block)

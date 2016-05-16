@@ -2,17 +2,16 @@
   %nav.bg-fondo.cabecera-borde
     %ul.no-list.no-padding.text-center.no-margin
       %li.col-md-3.inline-block.text-center
-        =image_tag "logo-gaming.png" ,height:"100px"
-      %li.col-md-7.inline-block.tall-padding
         =link_to root_path, class:"right-space white-text" do
           %i
-          Mi tienda
+          =image_tag "sologaming.png" ,height:"50px"
+      %li.col-md-7.inline-block.tall-padding
         = link_to products_url, class:"right-space white-text" do
           %i.mdi-account-box
           Productos
         = link_to articles_url, class:"right-space white-text" do
           %i.mdi-account-box
-          Articulos
+          Blog
         -if user_signed_in?
           =link_to carrito_path, class:"white-text" do
             %i.mdi-action-shopping-cart
@@ -25,10 +24,17 @@
           =link_to new_user_session_path, class:"right-space white-text" do
             %i.mdi-account-box
             Iniciar sesión
-  %nav.green.cabecera-borde
+  %nav.green.cabecera-borde.large-padding
     %ul.no-list.no-padding.text-center.no-margin
       %li.col-md-10.inline-block
         =link_to root_path, class:"right-space white-text" do
           %i
         -@Categories.each do |category|
           =link_to category.name, category, class:"white-text large-padding"
+  %nav.black.cabecera-borde.large-padding
+    %ul.no-list.no-padding.text-center.no-margin
+      %li.col-md-10.inline-block
+        =link_to root_path, class:"right-space white-text" do
+          %i
+        -@subcategories.each do |subcategory|
+          =link_to subcategory.name, subcategory, class:"white-text large-padding"

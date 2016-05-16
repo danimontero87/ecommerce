@@ -1,0 +1,28 @@
+<%= form_for @product,builder: BootstrapFormBuilder do |f| %>
+<%= f.errors %>
+  <%= f.text_field :name %>
+   <div> small Precio en centimos de euro </div>
+  <%= f.text_field :pricing %>
+  <%=f.file_field :avatar %>
+  <%= f.text_area :description %>
+
+
+
+<%= f.label :Categoria %>
+
+
+        <select  name="product[subcategory_id]">
+          <% @Categories.each do |categories| %>
+          <optgroup label="<%= categories.name %>">
+            <% categories.subcategories.each do |subcategory| %>
+            <option name="product[subcategory_id]" value="<%=subcategory.id%>"><%= subcategory.name %></option>
+            <%end%>
+
+          </optgroup>
+          <%end %>
+        </select>
+
+
+
+ <%= f.submit "Enviar"%>
+<%end %>

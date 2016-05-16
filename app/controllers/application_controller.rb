@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_shopping_cart
   before_action :set_categories
+  before_action :set_subcategories
 
 
 
@@ -22,6 +23,10 @@ end
 
   def set_categories
     @Categories = Category.all
+  end
+
+  def set_subcategories
+    @subcategories = Subcategory.all
   end
 
   def set_shopping_cart

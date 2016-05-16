@@ -1,20 +1,22 @@
 <div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
   <article class="card big-padding">
     <header>
-        <h1 class="grey-text bold"><%= @article.title %></h1>
+        <h1 class="grey-text bold text-center"><%= @article.title %></h1>
     </header>
       <section>
-        <div>
+        <div >
           <%=image_tag @article.cover.url(:medium) %>
         </div>
-        <h3 class="green-text bold normal"> <%=  @article.text%></h3>
+        <p style="text-align:justify" class="normal top-space "> <%=  @article.text%></p>
 
-        <div> <h4>Comentarios </h4>
+        <div> <h4 class="green white-text large-padding text-center">Comentarios </h4>
 
         <%= render "comments/form"%>
-        <ul id="comments-box">
+        <ul class="top-space" id="comments-box">
         <% @article.comments.each do |comment| %>
-        <li>  <%= comment.body %>
+        <li  class="no-list no-decoracion">  <%= comment.body %>
+         <strong><%= comment.user.email%> </strong>
+           <%= comment.created_at.strftime("%d-%m-%Y") %>
 
           </li>
           <%end%>

@@ -32,7 +32,7 @@ gem 'paperclip'
 # gem 'unicorn'
 
 
-
+gem 'credit_card_validator'
 gem 'devise'
 
 gem 'haml-rails'

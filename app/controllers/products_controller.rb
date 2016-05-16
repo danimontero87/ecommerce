@@ -6,7 +6,13 @@ before_action :authenticate_admin!, only: [:destroy, :publish, :edit]
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @productos = Product.all
+    @products = Product.order(:name)
+  respond_to do |format|
+    format.html
+    format.csv { send_data @products.to_csv }
+    format.xls { send_data @products.to_csv(col_sep: "\t") }
+  end
   end
 
   # GET /products/1
@@ -34,10 +40,12 @@ before_action :authenticate_admin!, only: [:destroy, :publish, :edit]
   # POST /products
   # POST /products.json
   def create
+
     @product = current_user.products.new(product_params)
 
     respond_to do |format|
       if @product.save
+
         format.html { redirect_to @product, notice: 'El producto ha sido creado con éxito' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -79,6 +87,6 @@ before_action :authenticate_admin!, only: [:destroy, :publish, :edit]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :pricing, :description, :avatar)
+      params.require(:product).permit(:name, :pricing, :description, :avatar, :subcategory_id)
     end
 end
