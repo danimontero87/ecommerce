@@ -2,23 +2,24 @@
 </div>
 
 
-<div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block big-padding kostic" >
+<div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block kostic" >
 
-      <div class="col-md-2 ">
-        <p class="text-center black white-text large-padding">Ultimas entradas</p>
-        <% @articles.each do |article| %>
-            <div class="sombra white top-space">
+  <div class="col-md-2 ">
+  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Lo + visto esta semana<span></h4>
+    <% @articles.each do |article| %>
+        <div class="card white">
 
-              <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium),class: "img-thumbnail"  %></div>
-              <p class="large-padding  grey-text small"> <%= truncate(article.text , length:80)%></p>
-                <%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
-                 <span  class="large-padding"> <%= article.created_at.strftime("%d-%m-%y") %></span> 
-              </div>
-          <%end%>
+          <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium), class: "img-thumbnail"  %></div>
+          <div class="grey-text small normal-padding">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </div>
+            <%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
+             <span class="large-padding"> <%= article.created_at.strftime("%d-%m-%y") %></span>
 
       </div>
+  <%end%>
+
+  </div>
       <div class="col-md-8">
-        <h3 class="text-center black white-text large-padding"> Los más vendidos </h3>
+        <h4 style="  padding: 5px 0px;"class=" border-bottom text-center cabecera">Últimas noticias </h4>
         <% @products.each do |product| %>
           <div class="col-md-2 ">
 
@@ -32,11 +33,56 @@
 
         </div>
           <%end%>
+
+
+
+
+
+        <article class="card">
+
+            <section>
+                <div class="display-block float-left large-padding">  <%=image_tag @article.cover.url(:medium) %></div>
+                <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to @article.title, @article %></h2>
+                <span class="normal">     <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).truncate(1100).html_safe%></span>
+
+                </div>
+
+            </section>
+
+        </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       <div class="col-md-2 ">
+        <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Iniciar Sesión <span></h4>
 
+              <div class="card normal-padding ">
 
+              <%= form_for("user", :url => user_session_path) do |f| %>
+              <label for="inputEmail" class="col-md-2 control-label">Email</label>
+                <%= f.text_field :email, class:"form-control" %>
+                <label for="inputPassword" class="col-md-2 control-label">Contraseña</label>
 
+                <%= f.password_field :password, class:"form-control" %>
+                <%= f.check_box :remember_me %>
+                <%= f.label :Recordar %><br>
+                <%= f.submit 'Iniciar',class:"btn-success large-padding normal" %>
+                <br>
+                <%= link_to "¿Olvidaste tu contraseña?", new_password_path('user') %>
+              <% end %>
+            </div>
+            sfsadfas
       </div>
 </div>
 

@@ -25,12 +25,24 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'paperclip'
 
+
+
+gem 'epic-editor-rails'
+
+gem 'sanitize'
+
+gem 'friendly_id'
+
+gem 'will_paginate-bootstrap'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'aasm'
+
+gem 'will_paginate'
 
 gem 'credit_card_validator'
 gem 'devise'
@@ -41,13 +53,11 @@ gem 'bootstrap-sass'
 
 gem 'bootstrap-material-design'
 
-gem 'paperclip'
 
 gem 'paypal-sdk-rest'
 
 gem 'annotate'
 
-gem 'aasm'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

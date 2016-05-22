@@ -2,22 +2,23 @@
 </div>
 
 
-<div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block big-padding kostic" >
+<div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block kostic" >
 
       <div class="col-md-2 ">
-        <p class="text-center black white-text large-padding">Ultimas entradas</p>
+        <h3 class="text-center black white-text large-padding">Últimas entradas</h3>
         <% @articles.each do |article| %>
-            <div class="sombra white top-space">
+            <div class="card white top-space">
 
-              <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium),class: "img-thumbnail"  %></div>
-              <p class="large-padding  grey-text small"> <%= truncate(article.text , length:80)%></p>
+              <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium), class: "img-thumbnail"  %></div>
+              <div class="grey-text small normal-padding">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </div>
                 <%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
                  <span class="large-padding"> <%= article.created_at.strftime("%d-%m-%y") %></span>
-              </div>
-          <%end%>
+
+          </div>
+      <%end%>
 
       </div>
-      <div class="col-md-8">
+      <div class="col-md-7">
         <h3 class="text-center black white-text large-padding"> Los más vendidos </h3>
         <% @products.each do |product| %>
           <div class="col-md-2 ">
@@ -32,9 +33,38 @@
 
         </div>
           <%end%>
+
+
+
+
+
+        <article class="card">
+
+            <section>
+                <div class="display-block float-left large-padding">  <%=image_tag @article.cover.url(:medium) %></div>
+                <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to @article.title, @article %></h2>
+                <span class="normal">     <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).truncate(1100).html_safe%></span>
+
+                </div>
+
+            </section>
+
+        </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       <div class="col-md-2 ">
-
 
 
       </div>

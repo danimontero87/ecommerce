@@ -1,32 +1,57 @@
-<div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
-  <article class="card big-padding">
+<div class="ancho-global margin-auto">
+
+<div class="col-lg-8 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 display-block float-left">
+  <article >
     <header>
-        <h1 class="grey-text bold text-center"><%= @article.title %></h1>
+        <h1 class="grey-text text-center"><%= @article.title %></h1>
+        <p><%= @article.created_at.strftime("%A, %d  %B %Y") %>
     </header>
-      <section>
-        <div >
+      <section class="normal">
+        <div  >
           <%=image_tag @article.cover.url(:medium) %>
         </div>
-        <p style="text-align:justify" class="normal top-space "> <%=  @article.text%></p>
+        <p style="text-align:justify" class=" top-space "> <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).html_safe%></p>
 
-        <div> <h4 class="green white-text large-padding text-center">Comentarios </h4>
 
-        <%= render "comments/form"%>
-        <ul class="top-space" id="comments-box">
-        <% @article.comments.each do |comment| %>
-        <li  class="no-list no-decoracion">  <%= comment.body %>
-         <strong><%= comment.user.email%> </strong>
-           <%= comment.created_at.strftime("%d-%m-%Y") %>
-
-          </li>
-          <%end%>
-          </ul>
-
-        </div>
 
       </section>
+
+      <div> <h4 class="green white-text large-padding text-center">Comentarios </h4>
+
+      <%= render "comments/form"%>
+      <ul class="top-space" id="comments-box">
+      <% @article.comments.each do |comment| %>
+      <li  class="no-list no-decoracion">  <%= comment.body %>
+       <strong><%= comment.user.email%> </strong>
+         <%= comment.created_at %>
+
+        </li>
+        <%end%>
+        </ul>
+
+      </div>
 
   </article>
 </div>
 
+
+<div class="col-lg-4 cold-md-2 cold-xs-2 col-sm-2 col-sm-11 display-block float-right top-space">
+  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Articulos relacionados <span></h4>
+  <%@articles.each do |article|%>
+
+  <article class="card">
+
+      <section>
+          <div class="display-block float-left large-padding">  <%=image_tag article.cover.url(:thumb) %></div>
+          <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to article.title, article %></h2>
+          <span class="small">  <%= truncate(article.text, length: 200 )%> </span>
+
+          </div>
+
+      </section>
+
+  </article>
+  <%end%>
+</div>
+</div>
 <%= link_to 'Back', articles_path %>

@@ -1,27 +1,48 @@
-<h1 class="text-center">Listado de Articulos </h1>
-  <%@articles.each do |article|%>
-<div class="col-lg-7 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 no-float center-block">
-  <article class="card big-padding">
-    <header>
-        <h1 class="grey-text bold">
 
 
-        <%= article.title %>
 
-        </h1>
-    </header>
-      <section>
-        <div>
-          <%=image_tag article.cover.url(:medium) %>
-        </div>
-        <h4 class="green-text bold normal"> <%=  article.text%></h4>
+<div class="ancho-global margin-auto">
 
-        <p class="large-padding"><%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
 
-      </section>
+<div class="col-lg-8 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 display-block float-left ">
+<h1 class="text-center top-space">Noticias, Análisis, Reportajes </h1>
+                <% @articles.each do |articles|%>
+                                <article class="card">
 
-  </article>
+                    <section>
+                        <div class="display-block float-left ancho-30 caja overflow">  <%=image_tag articles.cover.url(:thumb), style:"width:100%" %></div>
+                        <div class="display-block float-right ancho-70 large-padding  "><p class="grey-text normal"> <%=link_to articles.title, articles %></p>
+                            <%=  Sanitize.fragment(articles.text, Sanitize::Config::RELAXED).truncate(150).html_safe%>
+
+                          <p class="green-text">  <%= articles.comments.count %> Comentario(s)</p>
+                        </div>
+
+                    </section>
+
+                </article>
+                  <%end%>
+      <div style="text-align:center"><%= will_paginate @articles, renderer: BootstrapPagination::Rails %></div>
+    </div>
+
+<div class="col-lg-4 cold-md-2 cold-xs-2 col-sm-2 col-sm-11 display-block float-right top-space ">
+  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Lo más visto esta semana<span></h4>
+
+        <%@articleslast.each do |articleslast|%>
+
+        <article class="card small">
+
+            <section>
+                <div class="display-block float-left  overflow">  <%=image_tag articleslast.cover.url(:medium), style:"width:100%" %></div>
+                <div class="display-block float-left normal-padding"><p class="grey-text bold small"> <%=link_to articleslast.title, articleslast %></p>
+
+     <%=  Sanitize.fragment(articleslast.text, Sanitize::Config::RELAXED).truncate(150).html_safe%>
+                </div>
+
+            </section>
+
+        </article>
+        <%end%>
 </div>
 
-<%= link_to 'Back', articles_path %>
-      <%end%>
+
+</div>

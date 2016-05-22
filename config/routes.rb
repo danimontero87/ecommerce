@@ -32,6 +32,9 @@ Rails.application.routes.draw do
 
   get "/ok", to: "welcome#payment_succed"
 
+  get "/dashboard", to:"welcome#dashboard"
+
+  put "/articles/:id/publish", to: "articles#publish"
 
   authenticated :user do
 

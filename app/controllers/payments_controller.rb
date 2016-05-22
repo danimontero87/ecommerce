@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
        else
          Stores::Paypal.checkout(params[:PayerID],params[:paymentId]) do
       # Segun el curso es =====>    @my_payment.pay!
-        @shopping_cart.pay!
+        @my_payment.pay!
           redirect_to ok_path, notice:"Se procesó el pago con PayPal"
           return
          end
@@ -29,11 +29,11 @@ class PaymentsController < ApplicationController
                                       ip: request.remote_ip,
                                       email: params[:email],
                                       shopping_cart_id: cookies[:shopping_cart_id])
-    @shopping_cart.pay!
+    @my_payment.pay!
     redirect_to ok_path, notice: "El pago se realizó correctamente"
     return
     else
-        redirect_to carrito_path, notice: "Error al procesar el pago"
+        redirect_to carrito_path, notice: paypal_helper.payment.error
     end
 
   end
@@ -50,7 +50,7 @@ class PaymentsController < ApplicationController
                                    shopping_cart_id: cookies[:shopping_cart_id])
       redirect_to paypal_helper.payment.links.find{ |v| v.method == "REDIRECT" }.href
     else
-      redirect_to carrito_path, notice: "Error al procesar el pago"
+      raise paypal_helper.payment.error.to_yaml
     end
   end
 end

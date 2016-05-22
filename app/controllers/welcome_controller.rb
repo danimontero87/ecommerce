@@ -1,18 +1,24 @@
 class WelcomeController < ApplicationController
+    before_action :authenticate_user!, only: [:dashboard]
   def index
-    @articles = Article.all
+    @articles = Article.publicados.ultimos.limit(4)
     @categories = Category.all
-    @products = Product.all
+    @products = Product.last(12)
+    @article = Article.last
+
   end
 
   def unregistered
-        @articles = Article.all
+        @articles = Article.publicados.ultimos.limit(4)
         @categories = Category.all
-        @products = Product.all
-
-
+        @products = Product.last(12)
+          @article = Article.last
   end
 
+def dashboard
+    @articles = Article.all
+
+end
     def payment_succed
       if @shopping_cart.payed?
 

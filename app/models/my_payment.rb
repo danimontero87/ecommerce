@@ -28,6 +28,8 @@ class MyPayment < ActiveRecord::Base
 
         after do
 
+          shopping_cart.pay!
+
 
         end
         transitions from: :created, to: :payed

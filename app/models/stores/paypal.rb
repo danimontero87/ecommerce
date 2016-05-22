@@ -22,15 +22,16 @@ def process_card(card_data)
   options[:payer][:payment_method] = "credit_card"
   options[:payer][:funding_instruments] = [{
     credit_card: {
-      type: 'VISA',
+      type: CreditCardValidator::Validator.card_type(card_data[:number]),
       number: card_data[:number],
       expire_month: card_data[:expire_month].to_i,
       expire_year: card_data[:expire_year].to_i,
       cvv2: card_data[:ccv2]
-    }
+                }
 
     }]
-    self.payment = Payment.new(payment_options)
+
+    self.payment = Payment.new(options)
     self.payment
 end
 
@@ -68,7 +69,6 @@ end
       payment = Payment.find(payment_id)
       if payment.execute(payer_id: payer_id)
   yield if block_given?
-else
 
   end
 end

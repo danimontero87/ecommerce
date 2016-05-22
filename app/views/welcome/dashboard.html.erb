@@ -1,0 +1,23 @@
+<div class="col-lg-4 cold-md-2 cold-xs-2 col-sm-2 col-sm-11 display-block float-left">
+  <%@articles.each do |article|%>
+
+  <article class="card">
+
+      <section>
+          <div class="display-block float-left large-padding">  <%=image_tag article.cover.url(:thumb) %></div>
+          <div class="display-block float-left large-padding"><h2 class="grey-text bold"> <%=link_to article.title, article %></h2>
+            <%= truncate(article.text, length: 200 )%>
+
+            <%=link_to "Eliminar", article, class:"green-text", method: :delete %>
+
+            <% if article.may_publish? %>
+              <%=link_to "Publicar", "/articles/#{article.id}/publish", class:"green-text", method: :put %>
+
+              <%end%>
+          </div>
+
+      </section>
+
+  </article>
+  <%end%>
+</div>
