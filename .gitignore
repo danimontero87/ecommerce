@@ -15,7 +15,5 @@
 /log/*
 !/log/.keep
 /tmp
-<<<<<<< HEAD
-=======
+
 paypal.yml
->>>>>>> e3070e99a40bb93d9e0717acadfd2a72bc1f7964
