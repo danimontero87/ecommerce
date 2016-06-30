@@ -10,6 +10,8 @@ class SubcategoriesController < ApplicationController
   # GET /subcategories/1
   # GET /subcategories/1.json
   def show
+    #@category = @subcategory.category   ----->otra opcion
+    @article = Article.last
   end
 
   # GET /subcategories/new

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+
+
+#  get 'profile/index'
+
+#  get 'profile/show/:id' , to: "profile#show"
+
+# get 'profile/update'
+resources :genders
+
   resources :categories
   resources :subcategories
 
@@ -16,7 +25,11 @@ Rails.application.routes.draw do
   resources :in_shopping_carts, only: [:create, :destroy]
   get 'email/create'
 
+
+
   devise_for :users
+resources :users
+  resources :profile, only: [:index, :show, :update]
 
   post "/emails/create", as: :create_email
 

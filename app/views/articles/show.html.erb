@@ -1,33 +1,51 @@
+<div class="background-imagen no-padding no-margin" >
+</div>
+
 <div class="ancho-global margin-auto">
 
 <div class="col-lg-8 cold-md-8 cold-xs-12 col-sm-10 col-sm-11 display-block float-left">
-  <article >
+  <article class="top-space">
     <header>
-        <h1 class="grey-text text-center"><%= @article.title %></h1>
-        <p><%= @article.created_at.strftime("%A, %d  %B %Y") %>
+        <h1 class="grey-text top-space"><%= @article.title %></h1> <% unless @article.points.nil?%>
+          <div  class="points"> <p style="font-size:10px;">Puntuación</p><%=link_to @article.points %></div>
+          <%end%>
+
+
+
+        <p class="top-space"><%= @article.created_at.strftime("%A, %d  %B %Y") %> <i class="fa fa-eye" aria-hidden="true"></i>
+<%= @article.visits_count %></p>
+               <p> <% @article.categories.each do |category| %>
+              <li class="no-list inline-block padding-left-right margin-left-right white-text green radius tags"> <%=link_to category.name, category %></li>
+              <%end%></p>
+
     </header>
-      <section class="normal">
-        <div  >
+      <section class="normal justify">
+        <div class="top-space" >
           <%=image_tag @article.cover.url(:medium) %>
         </div>
-        <p style="text-align:justify" class=" top-space "> <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).html_safe%></p>
+        <p style="text-align:justify" class="top-space "> <%= (@article.text).html_safe%></p>
 
-
+<!--<p style="text-align:justify" class="top-space "> <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).html_safe%></p> -->
 
       </section>
 
-      <div> <h4 class="green white-text large-padding text-center">Comentarios </h4>
+      <div class="big-top-space">
+        <h4 class="green white-text large-padding text-center">Comentarios </h4>
+              <div class="top-space" id="comments-box">
+                      <% @comments.each do |comment| %>
+                      <article  class="no-list no-decoracion visibilidad-peque border-bottom-small top-space">
+                      <%= image_tag (comment.user.avatar), size: "30x30", alt: "Avatar" %><span style="font-weight: bold; padding-left:5px"><%= comment.user.name%> </span>
+                         <%= comment.created_at.strftime("%A, %d  %B %Y") %>
+                          <br> <br>   <%= comment.body %><br><br>
+                        </article>
+                        <%end%>
 
-      <%= render "comments/form"%>
-      <ul class="top-space" id="comments-box">
-      <% @article.comments.each do |comment| %>
-      <li  class="no-list no-decoracion">  <%= comment.body %>
-       <strong><%= comment.user.email%> </strong>
-         <%= comment.created_at %>
+                </div>
 
-        </li>
-        <%end%>
-        </ul>
+   <div style="text-align:center"><%= will_paginate @comments, renderer: BootstrapPagination::Rails %></div>
+
+     <%= render "comments/form"%>
+
 
       </div>
 
@@ -35,23 +53,51 @@
 </div>
 
 
-<div class="col-lg-4 cold-md-2 cold-xs-2 col-sm-2 col-sm-11 display-block float-right top-space">
-  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Articulos relacionados <span></h4>
-  <%@articles.each do |article|%>
+<div class="col-lg-4 cold-md-2 cold-xs-2 col-sm-2 col-sm-11 display-block float-right top-space ">
 
-  <article class="card">
 
-      <section>
-          <div class="display-block float-left large-padding">  <%=image_tag article.cover.url(:thumb) %></div>
-          <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to article.title, article %></h2>
-          <span class="small">  <%= truncate(article.text, length: 200 )%> </span>
+  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Lo más visto <span></h4>
 
-          </div>
+        <%@articles.each do |articles|%>
 
-      </section>
+        <article class="card small">
 
-  </article>
-  <%end%>
+            <section>
+                <div class="display-block float-left  overflow">  <%=image_tag articles.cover.url(:medium), style:"width:100%" %></div>
+                <div class="display-block float-left normal-padding"><p class="grey-text bold small"> <%=link_to articles.title, articles %></p>
+
+     <%=  Sanitize.fragment(articles.text, Sanitize::Config::RELAXED).truncate(150).html_safe%>
+                </div>
+
+            </section>
+
+        </article>
+        <%end%>
 </div>
+
+              <div class="col-md-12 display-block float-left">
+
+                <h4 style=" padding: 5px 0px;" class="border-bottom text-center cabecera">Últimas noticias </h4>
+
+                <% @articles_limit.each do |article| %>
+                            <div class="col-md-4 display-block float-left">
+                                  <div class="visibilidad overflow"> <%=image_tag article.cover.url(:medium) %></div>
+                                    <p class="green-text bold top-space normal"> <%= link_to article.title,  article%>  </p>
+                                <!--    <p class="grey-text small ">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </p>-->
+                                                  <div class="grey-text"> <i class="fa fa-calendar" aria-hidden="true"></i> <%= article.created_at.strftime("%d-%m-%y") %> -  <i class="fa fa-eye" aria-hidden="true"></i><%= article.visits_count %> <i class="fa fa-comments" aria-hidden="true"></i> <%= article.comments.count %> Comentario(s)</div>
+                                            <div class="grey-text bottom-space-small">
+                                               <% article.categories.each do |category| %>
+                                              <li class="no-list inline-block padding-left-right margin-left-right white-text green bold"><%= link_to category.name, category %></li>
+                                              <% end %>
+                                            </div>
+                            </div>
+                <%end%>
+
+              </div>
+
 </div>
+
+
+
+
 <%= link_to 'Back', articles_path %>

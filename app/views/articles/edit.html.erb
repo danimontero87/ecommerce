@@ -1,4 +1,4 @@
-<div class="ancho margin-auto big-padding"><%= form_for :article, :html => { :id => "articles_form" } , url: articles_path do |f| %>
+<div class="ancho margin-auto big-padding"><%= form_for @article, :html => { :id => "articles_form" } , url: article_path(@article) do |f| %>
 
   <% if @article.errors.any? %>
     <div id="error_explanation">
@@ -19,17 +19,47 @@
     <%= f.text_field :title,class:"form-control" %>
   </p>
 
+
+
   <p>
     <%= f.label :Portada %><br>
     <%= f.file_field :cover %>
   </p>
   <p>
+    <%= f.label :Puntuación %><br>
+    <%= f.number_field :points %>
+  </p>
+  <p>
     <%= f.label :Entrada %><br>
     <%= f.hidden_field :text, placeholder: "Escribe aquí el articulo", id:"body-textarea" %>
-
+    <%= f.hidden_field :markup_body, placeholder: "Escribe aquí el articulo", id:"markup-body-textarea" %>
   </p>
     <div id="epiceditor" style="height:500px"> </div></p>
 
+    <p>
+
+
+      <%= f.label :Categoria %><br>
+      <%  @Categories.each do |category| %>
+      <%= check_box_tag "categories[]", category.id %> <%= category.name %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= f.label :SubCategoria %><br>
+      <%  @subcategories.each do |subcategories| %>
+
+      <%= check_box_tag "subcategories[]", subcategories.id %> <%= subcategories.name %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= f.label :Género %><br>
+      <%  @genders.each do |genders| %>
+
+      <%= check_box_tag "genders[]", genders.id %> <%= genders.name %>
+      <% end %>
+    </p>
 <p>
   <pre lang="no-highlight"><code>
 
@@ -74,12 +104,7 @@ Listas
 
 
 </pre>
-  <p>
-    <%= f.label :Categoria %><br>
-    <%  @Categories.each do |category| %>
-    <%= check_box_tag "categories[]", category.id %> <%= category.name %>
-    <% end %>
-  </p>
+
   <p>
     <%= f.submit %>
   </p>
@@ -92,6 +117,7 @@ Listas
 
 <script >
 var editor = new EpicEditor({
+  textarea: "markup-body-textarea",
   file:{
     name: "nuevo_articulo"
   }
@@ -101,6 +127,7 @@ editor.load();
 $("#articles_form").on("submit",function(){
 
  $("#body-textarea").val( editor.exportFile("nuevo_articulo", "html"));
+ $("#markup-body-textarea").val( editor.exportFile("nuevo_articulo"));
 
 });
 

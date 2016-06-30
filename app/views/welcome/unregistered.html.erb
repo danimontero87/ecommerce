@@ -4,93 +4,74 @@
 
 <div style="margin-top:2em" class="col-md-12 col-xs-10 margin-auto center-block kostic" >
 
-  <div class="col-md-2 ">
-  <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Lo + visto esta semana<span></h4>
-    <% @articles.each do |article| %>
-        <div class="card white">
 
-          <div class="visibilidad relative "> <%=image_tag article.cover.url(:medium), class: "img-thumbnail"  %></div>
-          <div class="grey-text small normal-padding">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </div>
-            <%= link_to 'Ver', article ,class:"btn-success large-padding medium" %>
-             <span class="large-padding"> <%= article.created_at.strftime("%d-%m-%y") %></span>
+      <div class="col-md-9 display-block float-left">
 
-      </div>
-  <%end%>
+        <h4 style=" padding: 5px 0px;" class="border-bottom text-center bg-fondo white-text">Últimas noticias </h4>
 
+        <% @articles_limit.each do |article| %>
+                    <div class="col-md-4 display-block float-left altura-more">
+                          <div class="visibilidad overflow"> <%=image_tag article.cover.url(:medium) %></div>
+                            <p class="grey-text bold top-space normal"> <%= link_to article.title,  article%>  </p>
+                        <!--    <p class="grey-text small ">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </p>-->
+                                          <div class="grey-text"> <i class="fa fa-calendar" aria-hidden="true"></i> <%= article.created_at.strftime("%d-%m-%y") %> -  <i class="fa fa-eye" aria-hidden="true"></i><%= article.visits_count %> <i class="fa fa-comments" aria-hidden="true"></i> <%= article.comments.count %></div>
+                                    <div class="grey-text bottom-space-small">
+                                       <% article.categories.each do |category| %>
+                                      <li class="no-list inline-block padding-left-right margin-left-right white-text green radius tags"><%= link_to category.name, category %></li>
+                                      <% end %>
+                                    </div>
+                    </div>
+        <%end%>
+
+
+          <h4 style="padding: 5px 0px;" class=" border-bottom text-center  bg-fondo white-text clearboth ">A Detalle... </h4>
+            <article class="card">
+                <section>
+                    <div class="display-block float-left large-padding">  <%=image_tag @article.cover.url(:medium) %></div>
+                    <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to @article.title, @article %></h2>
+                    <span class="normal">     <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).truncate(1100).html_safe%></span>        </div>
+                 </section>
+
+            </article>
   </div>
-      <div class="col-md-8">
-        <h4 style="  padding: 5px 0px;"class=" border-bottom text-center cabecera">Últimas noticias </h4>
-        <% @products.each do |product| %>
-          <div class="col-md-2 ">
 
-              <div class="visibilidad relative "> <%= image_tag product.avatar.url(:medium), class: "img-thumbnail" %></div>
-              <p class="large-padding green-text bold altura "> <%= product.name %></p>
+                        <div class="col-md-3 ">
+                          <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Iniciar Sesión <i class="fa fa-sign-out" aria-hidden="true"></i> <span></h4>
 
-                    <p ><span class="medium bold green-text"> <%= product.pricing %>€ </span><%= link_to 'Comprar', product ,class:"green white-text large-padding small radius" %></p>
-              <!-- <p class="large-padding"> <%= product.created_at.strftime("%A %y-%m-%d") %></p> -->
+                                        <div class="background-inicio ">
+                                                  <%= form_for("user", :url => user_session_path) do |f| %>
+                                                  <label for="inputEmail" class="control-label white-text ">Email</label>
+                                                    <%= f.text_field :email, class:"form-control " %>
+                                                    <label for="inputPassword" class="control-label white-text">Contraseña</label>
 
-              <p class="large-padding "> <%= truncate(product.description, length:20) %></p>
+                                                    <%= f.password_field :password, class:"form-control" %>
+                                                    <%= f.check_box :remember_me %>
+                                                    <%= f.label :Recordar, class:"white-text" %><br>
+                                                    <%= f.submit 'Iniciar',class:"btn-success large-padding normal" %>
+                                                    <br><br>
+                                                    <%= link_to "¿Olvidaste tu contraseña?", new_password_path('user'), class:"white-text" %>
+                                                  <% end %>
+                                          </div>
 
-        </div>
-          <%end%>
+                            <h4 style="padding: 5px 0px;" class="white-text border-bottom "><span class="green large-padding" >Lo + visto esta semana</span></h4>
+                                    <% @articles.each do |article| %>
+                                        <div class="white margin-bottom border-bottom-small">
 
+                                          <div class="relative"> <%=image_tag article.cover.url(:medium), class: "img-thumbnail"  %></div>
+                                          <p class="grey-text bold large-padding normal"><%= link_to article.title, article %></p>
+                                        <p class="grey-text small  padding-left-right">   <%=  Sanitize.fragment(article.text, Sanitize::Config::RELAXED).truncate(100).html_safe%>  </p>
 
+                                             <p class="large-padding green-text large-padding"><i class="fa fa-calendar" aria-hidden="true"></i><%= article.created_at.strftime("%d-%m-%y") %> <i class="fa fa-eye" aria-hidden="true"></i><%= article.visits_count %></p>
 
-
-
-        <article class="card">
-
-            <section>
-                <div class="display-block float-left large-padding">  <%=image_tag @article.cover.url(:medium) %></div>
-                <div class="display-block float-left large-padding"><h3 class="grey-text "> <%=link_to @article.title, @article %></h2>
-                <span class="normal">     <%=  Sanitize.fragment(@article.text, Sanitize::Config::RELAXED).truncate(1100).html_safe%></span>
-
-                </div>
-
-            </section>
-
-        </article>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-      <div class="col-md-2 ">
-        <h4 style="  padding: 5px 0px;"class="white-text border-bottom "><span class="green large-padding" >Iniciar Sesión <span></h4>
-
-              <div class="card normal-padding ">
-
-              <%= form_for("user", :url => user_session_path) do |f| %>
-              <label for="inputEmail" class="col-md-2 control-label">Email</label>
-                <%= f.text_field :email, class:"form-control" %>
-                <label for="inputPassword" class="col-md-2 control-label">Contraseña</label>
-
-                <%= f.password_field :password, class:"form-control" %>
-                <%= f.check_box :remember_me %>
-                <%= f.label :Recordar %><br>
-                <%= f.submit 'Iniciar',class:"btn-success large-padding normal" %>
-                <br>
-                <%= link_to "¿Olvidaste tu contraseña?", new_password_path('user') %>
-              <% end %>
-            </div>
-            sfsadfas
-      </div>
+                                           </div>
+                                      <%end%>
+                            </div>
 </div>
 
-<h1 class="text-center clearboth">Recibe nuestras ofertas </h1>
+<div class=" big-padding bottom-space top-space clearboth">
 
-<div class="top-space big-padding bottom-space">
   <div class="col-md-11 col-xs-12 center-block no-float">
-
+  <h1 class="text-center  top-space">Recibe nuestro email </h1>
       <%= form_tag(create_email_path, method: :post, remote:true,id: "emails-form") do %>
       <%= email_field_tag "email", nil, class:"col-xs-12 inline-block text-center landing-form", placeholder:"Escribe aquí tu email"  %>
       <%end%>

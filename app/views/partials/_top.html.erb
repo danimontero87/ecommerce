@@ -1,0 +1,39 @@
+<header>
+  <nav class="black cabecera-borde">
+    <ul class="no-list no-padding text-center no-margin">
+
+
+      <li class="col-md-4  inline-block text-align-left ">
+
+
+
+
+        <% if user_signed_in? %>
+        <i class="fa fa-user-times white-text" aria-hidden="true"></i> <%=link_to "Desconectar", destroy_user_session_path, class:"right-space white-text", method: :delete %>
+
+        <i class="fa fa-user white-text" aria-hidden="true"></i> <%=link_to "Configuración de cuenta" , profile_path(current_user), class:"right-space white-text" %>
+
+
+        <%=link_to carrito_path, class:"white-text" do %>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Mi carrito (<%=@shopping_cart.products.count%>)
+        <%end%>
+        <%end%>
+                <%if current_user.nil? %>
+                        <%=link_to new_user_session_path, class:"right-space white-text " do %>
+                        <i class="fa fa-users" aria-hidden="true"></i> Conéctate
+
+                        <%end%>
+                <%end%>
+      </li>
+      <li class="col-md-4  inline-block text-align-right ">
+                <%=link_to products_url, class:"right-space white-text text-align-right" do %>
+                <i class="fa fa-gamepad" aria-hidden="true"></i> Productos
+                <%end%>
+
+                <%=link_to articles_url, class:"right-space white-text" do %>
+                <i class="fa fa-comments-o" aria-hidden="true"></i> Blog
+                <%end%>
+      </li>
+    </ul>
+    </nav>
+</header>

@@ -1,32 +1,37 @@
-<%= form_for [@article,@comment], remote: true, html: {id: "comments-form", :"data-type" => "json"} do |f| %>
-<% if @comment.errors.any?%>
-<div id="error_explanation">
-<h2> <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-    <ul>
-    <% @comment.errors.full_messages.each do |message| %>
-     <li> <%= message %> </li>
+<% if user_signed_in? %>
 
-    <%end%>
-    </ul>
-</div>
+          <%= form_for [@article,@comment], remote: true, html: {id: "comments-form", :"data-type" => "json"} do |f| %>
+          <% if @comment.errors.any?%>
+          <div id="error_explanation">
+          <h2> <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+              <ul>
+              <% @comment.errors.full_messages.each do |message| %>
+               <li> <%= message %> </li>
+
+              <%end%>
+              </ul>
+          </div>
+
+
+          <%end%>
+
+          <div class="field">
+          <%= f.text_area :body, placeholder:"Escribe aquí tu comentario"%>
+
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Enviar", class:"green white-text boton normal margin-auto" %>
+          </div>
+
+          <%end%>
 
 
 <%end%>
 
-<div class="field">
-<%= f.text_area :body, placeholder:"Escribe aquí tu comentario"%>
+<%if current_user.nil? %>
+  <%= link_to "Iniciar sesión para participar", new_user_session_path,  class:"green white-text large-padding boton medium" %>
 
-</div>
-
-
-
-
-<div class="actions">
-<%= f.submit "Enviar", class:"green white-text large-padding" %>
-
-</div>
-
-
-
-<%end%>
+  <%end%>

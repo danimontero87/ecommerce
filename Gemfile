@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'paperclip'
 
+gem "font-awesome-rails"
 
 
 gem 'epic-editor-rails'

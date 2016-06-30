@@ -24,13 +24,40 @@
     <%= f.file_field :cover %>
   </p>
   <p>
+    <%= f.label :Puntuación %><br>
+    <%= f.number_field :points %>
+  </p>
+  <p>
     <%= f.label :Entrada %><br>
     <%= f.hidden_field :text, placeholder: "Escribe aquí el articulo", id:"body-textarea" %>
+    <%= f.hidden_field :markup_body, placeholder: "Escribe aquí el articulo", id:"markup-body-textarea" %>
 
   </p>
     <div id="epiceditor" style="height:500px"> </div></p>
 
+
+
+
+
+    <p>
+      <%= f.label :Categoria %><br>
+      <%  @Categories.each do |category| %>
+      <%= check_box_tag "categories[]", category.id %> <%= category.name %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= f.label :Subcategoría %><br>
+      <%  @subcategories.each do |subcategories| %>
+
+      <%= check_box_tag "subcategories[]", subcategories.id %> <%= subcategories.name %> <span style="background-color:#008000; color:#ffffff; padding-left:2px; padding-right:2px;"><%= subcategories.category.name %></span>
+      <% end %>
+    </p>
+
+
+
 <p>
+
   <pre lang="no-highlight"><code>
 
                                     INSTRUCCIONES DE USO
@@ -74,14 +101,9 @@ Listas
 
 
 </pre>
+
   <p>
-    <%= f.label :Categoria %><br>
-    <%  @Categories.each do |category| %>
-    <%= check_box_tag "categories[]", category.id %> <%= category.name %>
-    <% end %>
-  </p>
-  <p>
-    <%= f.submit %>
+    <%= f.submit "Guarda artículo" %>
   </p>
 
 <% end %>
@@ -92,6 +114,7 @@ Listas
 
 <script >
 var editor = new EpicEditor({
+    textarea: "markup-body-textarea",
   file:{
     name: "nuevo_articulo"
   }

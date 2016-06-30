@@ -1,0 +1,36 @@
+<div class="ancho margin-auto big-padding"><%= form_for @gender do |f| %>
+
+  <% if @gender.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@gender.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @gender.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name, class:"col-md-2 control-label" %><br>
+    <%= f.text_field :name,class:"form-control" %>
+  </p>
+
+  <p>
+    <%= f.label :Categoria %><br>
+    <%  @categories.each do |category| %>
+    <%= check_box_tag "category_id", category.id %> <%= category.name %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
+
+</div>

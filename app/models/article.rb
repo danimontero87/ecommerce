@@ -2,14 +2,19 @@ class Article < ActiveRecord::Base
 
   include AASM
   belongs_to :user
+
   has_many :comments
+  has_many :has_categories
+  has_many :categories, through: :has_categories
+  has_many :has_subcategories
+  has_many :subcategories, through: :has_subcategories
 
-  after_create :save_categories
+  has_many :has_genders
+  has_many :genders, through: :has_genders
+ before_create :set_visits_count
 
-  def categories=(value)
-    @Categories =value
 
-  end
+
 
 
   has_attached_file :cover, styles: {medium: "1280x720", thumb:"400x300"}
@@ -17,6 +22,7 @@ class Article < ActiveRecord::Base
 
   scope :publicados, ->{ where(state: "published") }
   scope :ultimos, -> { order("created_at DESC")}
+  scope :vistos, -> { order("visits_count").reverse_order}
 
   aasm column: "state" do
     state :in_draft, initial: true
@@ -33,12 +39,19 @@ class Article < ActiveRecord::Base
   end
 
 
+def update_visits_count
+  self.update(visits_count: self.visits_count + 1)
+end
+
 
   private
-  def save_categories
-    @Categories.each do |category_id|
-      HasCategory.create(category_id: category_id, article_id: self.id)
-    end
 
+
+  def set_visits_count
+
+      self.visits_count = 0
   end
+
+
+
 end

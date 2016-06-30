@@ -1,0 +1,36 @@
+<div class="ancho-50 margin-auto">
+
+  <%= render "profile/form" %>
+  <h2>Perfil <%= current_user.profile.name %></h2>
+
+<%= form_for @profile, :url=>{:action=>:update}, :html=>{:method=> :put} do |f| %>
+
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :Apellidos %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :Ciudad %><br />
+    <%= f.text_field :city, autofocus: true %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :Edad %><br />
+    <%= f.text_field :birth_date, autofocus: true %>
+  </div>
+<br>
+
+
+  <div class="actions">
+    <%= f.submit "Actualizar", class:"btn-success normal" %>
+  </div>
+<% end %>
+
+
+
+</div>

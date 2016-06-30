@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517093326) do
+ActiveRecord::Schema.define(version: 20160624080212) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20160517093326) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.string   "state",              default: "in_draft"
+    t.integer  "visits_count"
+    t.integer  "points"
+    t.text     "markup_body"
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
@@ -44,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160517093326) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "color"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -57,6 +61,15 @@ ActiveRecord::Schema.define(version: 20160517093326) do
   add_index "comments", ["article_id"], name: "index_comments_on_article_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "genders", force: :cascade do |t|
+    t.string  "name"
+    t.integer "categories_id"
+    t.integer "category_id"
+  end
+
+  add_index "genders", ["categories_id"], name: "index_genders_on_categories_id"
+  add_index "genders", ["category_id"], name: "index_genders_on_category_id"
+
   create_table "has_categories", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "category_id"
@@ -66,6 +79,24 @@ ActiveRecord::Schema.define(version: 20160517093326) do
 
   add_index "has_categories", ["article_id"], name: "index_has_categories_on_article_id"
   add_index "has_categories", ["category_id"], name: "index_has_categories_on_category_id"
+
+  create_table "has_genders", force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "gender_id"
+  end
+
+  add_index "has_genders", ["article_id"], name: "index_has_genders_on_article_id"
+  add_index "has_genders", ["gender_id"], name: "index_has_genders_on_gender_id"
+
+  create_table "has_subcategories", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "subcategory_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "has_subcategories", ["article_id"], name: "index_has_subcategories_on_article_id"
+  add_index "has_subcategories", ["subcategory_id"], name: "index_has_subcategories_on_subcategory_id"
 
   create_table "in_shopping_carts", force: :cascade do |t|
     t.integer  "product_id"
@@ -118,6 +149,16 @@ ActiveRecord::Schema.define(version: 20160517093326) do
   add_index "products", ["subcategory_id"], name: "index_products_on_subcategory_id"
   add_index "products", ["user_id"], name: "index_products_on_user_id"
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name"
+    t.string   "last_name"
+    t.string   "birth_date"
+    t.string   "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shopping_carts", force: :cascade do |t|
     t.string   "status"
     t.string   "ip"
@@ -148,6 +189,7 @@ ActiveRecord::Schema.define(version: 20160517093326) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "permission_level",       default: 1
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
